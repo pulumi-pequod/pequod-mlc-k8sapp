@@ -15,10 +15,10 @@
 
 import sys
 
+import pulumi
 import pulumi.provider
-import gke_provider
-import gke_provider.provider
+import k8sapp_provider.provider
 
 
 if __name__ == '__main__':
-    pulumi.provider.main(gke_provider.provider.Provider(), sys.argv[1:])
+    pulumi.provider.main(k8sapp_provider.provider.Provider(), sys.argv[1:])

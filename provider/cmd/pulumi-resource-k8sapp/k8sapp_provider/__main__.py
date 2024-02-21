@@ -17,7 +17,7 @@ import sys
 
 import pulumi
 import pulumi.provider
-import gke_provider.provider
+import k8sapp_provider.provider
 
 
 if __name__ == '__main__':

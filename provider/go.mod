@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-pequod-gke
+module github.com/pulumi/pulumi-pequod-k8sapp
 
 go 1.20
 

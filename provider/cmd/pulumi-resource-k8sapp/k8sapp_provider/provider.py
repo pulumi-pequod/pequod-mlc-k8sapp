@@ -18,14 +18,14 @@ from pulumi import Inputs, ResourceOptions
 from pulumi.provider import ConstructResult
 import pulumi.provider as provider
 
-import gke_provider
-from gke_provider.cluster import Cluster, ClusterArgs 
+import k8sapp_provider
+from k8sapp_provider.service_deployment import ServiceDeployment, ServiceDeploymentArgs 
 
 
 class Provider(provider.Provider):
 
     def __init__(self) -> None:
-        super().__init__(gke_provider.__version__, gke_provider.__schema__)
+        super().__init__(k8sapp_provider.__version__, k8sapp_provider.__schema__)
 
     def construct(self,
                   name: str,
@@ -33,23 +33,22 @@ class Provider(provider.Provider):
                   inputs: Inputs,
                   options: Optional[ResourceOptions] = None) -> ConstructResult:
 
-        if resource_type == 'gke:index:Cluster':
-            return _construct_cluster(name, inputs, options)
+        if resource_type == 'k8sapp:index:ServiceDeployment':
+            return _construct_servicedeployment(name, inputs, options)
 
         raise Exception(f'Unknown resource type {resource_type}')
 
 
-def _construct_cluster(name: str,
+def _construct_servicedeployment(name: str,
                            inputs: Inputs,
                            options: Optional[ResourceOptions] = None) -> ConstructResult:
 
     # Create the component resource.
-    cluster = Cluster(name, ClusterArgs.from_inputs(inputs), dict(inputs), options)
+    servicedeployment = ServiceDeployment(name, ServiceDeploymentArgs.from_inputs(inputs), dict(inputs), options)
 
     # Return the component resource's URN and outputs as its state.
     return provider.ConstructResult(
-        urn=cluster.urn,
+        urn=servicedeployment.urn,
         state={
-            'kubeconfig': cluster.kubeconfig,
-            'cluster_name': cluster.cluster_name,
+            'ip_address': servicedeployment.ip_address,
         })

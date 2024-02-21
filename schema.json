@@ -13,12 +13,16 @@
                     "type": "string",
                     "description": "Name of the image for the application."
                 },
+                "isMinikube": {
+                    "type": "boolean",
+                    "description": "Used to indicate if minikube environment is being used. Defaults to False."
+                },
                 "namespace": {
                     "type": "string",
                     "description": "K8s namespace to use."
                 },
                 "containerPort": {
-                    "type": "string",
+                    "type": "number",
                     "description": "Port container listens on."
                 },
                 "request_cpu": {
@@ -34,7 +38,7 @@
                     "description": "Number of pod replicas to create. Defaults to 1." 
                 },
                 "targetPort": {
-                    "type": "string",
+                    "type": "number",
                     "description": "Target port for the service. Defaults to the containerPort."
                 }
             },
@@ -64,7 +68,7 @@
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi-pequod/pequod-mlc-gke/sdk/go/cluster",
+            "importBasePath": "github.com/pulumi-pequod/pequod-mlc-k8sapp/sdk/go/cluster",
             "respectSchemaVersion": true
 
         },
