@@ -21,4 +21,4 @@ import k8sapp_provider.provider
 
 
 if __name__ == '__main__':
-    pulumi.provider.main(gke_provider.provider.Provider(), sys.argv[1:])
+    pulumi.provider.main(k8sapp_provider.provider.Provider(), sys.argv[1:])

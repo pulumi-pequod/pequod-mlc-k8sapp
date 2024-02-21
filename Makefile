@@ -1,6 +1,6 @@
 VERSION         := 0.0.1
 
-PACK            := servicedeployment
+PACK            := k8sapp
 ORG							:= pulumi-pequod
 PROJECT         := github.com/${ORG}/${PACK}
 

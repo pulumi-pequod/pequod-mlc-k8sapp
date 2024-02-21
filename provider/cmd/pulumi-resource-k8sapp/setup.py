@@ -20,6 +20,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'pulumi>=3.0.0',
-        'pulumi_gcp>=7.0.0',
+        'pulumi_kubernetes>=4.7.0',
     ],
 )
