@@ -1,6 +1,6 @@
-VERSION         := 1.0.11
+VERSION         := 0.0.1
 
-PACK            := gke
+PACK            := servicedeployment
 ORG							:= pulumi-pequod
 PROJECT         := github.com/${ORG}/${PACK}
 
@@ -119,7 +119,7 @@ build_python_sdk:: gen_python_sdk
 
 # Output tarballs for plugin distribution. Example use:
 #
-# pulumi plugin install resource gke 0.0.1 --file pulumi-resource-gke-v0.0.1-linux-amd64.tar.gz
+# pulumi plugin install resource k8-servicedeployment 0.0.1 --file pulumi-resource-k8s-servicedeployment-v0.0.1-linux-amd64.tar.gz
 
 dist::	build_provider
 	rm -rf dist

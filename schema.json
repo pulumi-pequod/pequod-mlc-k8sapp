@@ -1,47 +1,64 @@
 {
-    "name": "gke",
-    "pluginDownloadURL": "github://api.github.com/pulumi-pequod/pequod-mlc-gke",
+    "name": "k8sapp",
+    "pluginDownloadURL": "github://api.github.com/pulumi-pequod/pequod-mlc-servicedeployment",
     "resources": {
-        "gke:index:Cluster": {
+        "k8sapp:index:ServiceDeployment": {
             "isComponent": true,
             "inputProperties": {
-                "masterVersion": {
-                    "type": "string",
-                    "description": "K8s cluster master version to use."
+                "allocateIpAddress": {
+                    "type": "boolean",
+                    "description": "Whether or not to allocate an IP address for the service. Defaults to false."
                 },
-                "nodeCount": {
+                "image": {
+                    "type": "string",
+                    "description": "Name of the image for the application."
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "K8s namespace to use."
+                },
+                "containerPort": {
+                    "type": "string",
+                    "description": "Port container listens on."
+                },
+                "request_cpu": {
+                    "type": "string",
+                    "description": "Requested CPU. E.g. 250m means 0.25 CPU. Defaults to 100m."
+                },
+                "request_memory": {
+                    "type": "string",
+                    "description": "Requested memory. E.g. 64Mi means 64 MiB. Defaults to 64Mi."
+                },
+                "replicas": {
                     "type": "number",
-                    "description": "Initial node count for the cluster."
+                    "description": "Number of pod replicas to create. Defaults to 1." 
                 },
-                "nodeMachineType": {
+                "targetPort": {
                     "type": "string",
-                    "description": "Machine type to use for the nodes."
+                    "description": "Target port for the service. Defaults to the containerPort."
                 }
             },
             "requiredInputs": [
+                "image",
+                "namespace",
+                "containerPort"
             ],
             "properties": {
-                "cluster_name": {
+                "ipAddress": {
                     "type": "string",
-                    "description": "GKE cluster name"
+                    "description": "Allocated IP address if applicable."
                 },
-                "kubeconfig": {
-                    "type": "string",
-                    "description": "K8s cluster kubeconfig."
-                }
             },
             "required": [
-                "cluster_name",
-                "kubeconfig"
             ]
         }
     },
     "language": {
         "csharp": {
-            "packageName": "pequod.Gke",
+            "packageName": "pequod.K8sApp",
             "packageReferences": {
                 "Pulumi": "3.*",
-                "Pulumi.Gcp": "7.*"
+                "Pulumi.Kubernetes": "4.*"
             },
             "respectSchemaVersion": true
         },
@@ -52,9 +69,9 @@
 
         },
         "nodejs": {
-            "packageName": "@pequod/gke",
+            "packageName": "@pequod/k8sapp",
             "dependencies": {
-                "@pulumi/gcp": "^7.0.0",
+                "@pulumi/kubernetes": "^4.7.0",
                 "@pulumi/pulumi": "^3.0.0"
             },
             "devDependencies": {
@@ -64,15 +81,15 @@
             },
             "scripts": {
                 "build": "tsc",
-                "install": "node scripts/install-pulumi-plugin.js resource gke ${VERSION}"
+                "install": "node scripts/install-pulumi-plugin.js resource k8sapp ${VERSION}"
             },
             "respectSchemaVersion": true
         },
         "python": {
-            "packageName": "pequod_gke",
+            "packageName": "pequod_k8sapp",
             "requires": {
                 "pulumi": ">=3.0.0,<4.0.0",
-                "pulumi-gcp": ">=7.0.0,<8.0.0"
+                "pulumi-kubernetes": ">=4.7.0,<8.0.0"
             },
             "respectSchemaVersion": true
         }

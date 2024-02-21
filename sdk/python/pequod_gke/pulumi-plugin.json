@@ -1,5 +1,0 @@
-{
-  "resource": true,
-  "name": "gke",
-  "server": "github://api.github.com/pulumi-pequod/pequod-mlc-gke"
-}

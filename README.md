@@ -1,5 +1,5 @@
-# Pequod GKE Multilanguage Component
-This multilanguage component abstracts the creation of a GKE cluster and related resources.
+# Pequod Kubernetes Service-Deployment Multilanguage Component
+This multilanguage component abstracts the creation of a kubernetes deployment and service.
 
 ## Building and Publishing the MLC 
 Whenever the component code (under provider/cmd/pulumi-resource...) or schema.json, etc has been udated, follow the process below to make the updated version available:
