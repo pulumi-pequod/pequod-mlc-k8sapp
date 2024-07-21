@@ -1,2 +1,2 @@
-// Package stackmgmt exports types, functions, subpackages for provisioning stackmgmt resources.
-package stackmgmt
+// Package k8sapp exports types, functions, subpackages for provisioning k8sapp resources.
+package k8sapp

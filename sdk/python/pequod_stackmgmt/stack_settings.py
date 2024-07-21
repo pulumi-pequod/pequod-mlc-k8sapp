@@ -9,10 +9,10 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
-__all__ = ['StackSettingsArgs', 'StackSettings']
+__all__ = ['ServiceDeploymentArgs', 'ServiceDeployment']
 
 @pulumi.input_type
-class StackSettingsArgs:
+class ServiceDeploymentArgs:
     def __init__(__self__, *,
                  delete_stack: Optional[pulumi.Input[str]] = None,
                  drift_management: Optional[pulumi.Input[str]] = None,
@@ -20,7 +20,7 @@ class StackSettingsArgs:
                  team_assignment: Optional[pulumi.Input[str]] = None,
                  ttl_time: Optional[pulumi.Input[float]] = None):
         """
-        The set of arguments for constructing a StackSettings resource.
+        The set of arguments for constructing a ServiceDeployment resource.
         :param pulumi.Input[str] delete_stack: Stack delete setting for automated purge processing.
         :param pulumi.Input[str] drift_management: Drift management setting for refresh or correction.
         :param pulumi.Input[str] pulumi_access_token: Pulumi access token to set up as a deployment environment variable if provided.
@@ -99,7 +99,7 @@ class StackSettingsArgs:
         pulumi.set(self, "ttl_time", value)
 
 
-class StackSettings(pulumi.ComponentResource):
+class ServiceDeployment(pulumi.ComponentResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -111,7 +111,7 @@ class StackSettings(pulumi.ComponentResource):
                  ttl_time: Optional[pulumi.Input[float]] = None,
                  __props__=None):
         """
-        Create a StackSettings resource with the given unique name, props, and options.
+        Create a ServiceDeployment resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] delete_stack: Stack delete setting for automated purge processing.
@@ -124,17 +124,17 @@ class StackSettings(pulumi.ComponentResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: Optional[StackSettingsArgs] = None,
+                 args: Optional[ServiceDeploymentArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a StackSettings resource with the given unique name, props, and options.
+        Create a ServiceDeployment resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
-        :param StackSettingsArgs args: The arguments to use to populate this resource's properties.
+        :param ServiceDeploymentArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(StackSettingsArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(ServiceDeploymentArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -157,15 +157,15 @@ class StackSettings(pulumi.ComponentResource):
         else:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = StackSettingsArgs.__new__(StackSettingsArgs)
+            __props__ = ServiceDeploymentArgs.__new__(ServiceDeploymentArgs)
 
             __props__.__dict__["delete_stack"] = delete_stack
             __props__.__dict__["drift_management"] = drift_management
             __props__.__dict__["pulumi_access_token"] = pulumi_access_token
             __props__.__dict__["team_assignment"] = team_assignment
             __props__.__dict__["ttl_time"] = ttl_time
-        super(StackSettings, __self__).__init__(
-            'stackmgmt:index:StackSettings',
+        super(ServiceDeployment, __self__).__init__(
+            'k8sapp:index:ServiceDeployment',
             resource_name,
             __props__,
             opts,

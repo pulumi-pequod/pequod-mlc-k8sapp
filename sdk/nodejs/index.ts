@@ -10,28 +10,28 @@ export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
 utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 
-export { StackSettingsArgs } from "./stackSettings";
-export type StackSettings = import("./stackSettings").StackSettings;
-export const StackSettings: typeof import("./stackSettings").StackSettings = null as any;
-utilities.lazyLoad(exports, ["StackSettings"], () => require("./stackSettings"));
+export { ServiceDeploymentArgs } from "./serviceDeployment";
+export type ServiceDeployment = import("./serviceDeployment").ServiceDeployment;
+export const ServiceDeployment: typeof import("./serviceDeployment").ServiceDeployment = null as any;
+utilities.lazyLoad(exports, ["ServiceDeployment"], () => require("./serviceDeployment"));
 
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "stackmgmt:index:StackSettings":
-                return new StackSettings(name, <any>undefined, { urn })
+            case "k8sapp:index:ServiceDeployment":
+                return new ServiceDeployment(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("stackmgmt", "index", _module)
-pulumi.runtime.registerResourcePackage("stackmgmt", {
+pulumi.runtime.registerResourceModule("k8sapp", "index", _module)
+pulumi.runtime.registerResourcePackage("k8sapp", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
-        if (type !== "pulumi:providers:stackmgmt") {
+        if (type !== "pulumi:providers:k8sapp") {
             throw new Error(`unknown provider type ${type}`);
         }
         return new Provider(name, <any>undefined, { urn });

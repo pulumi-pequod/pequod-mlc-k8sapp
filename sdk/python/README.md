@@ -15,7 +15,7 @@ The core component is written in Typescript.
 Pequod uses basic github distribution for the Python SDKs.
 
 To use with Python, add the following to the Pulumi project's `requirements.txt` file:
-* `pequod_stackmgmt @ git+https://github.com/pulumi-pequod/pequod-mlc-stackmgmt.git#subdirectory=sdk/python/bin`
+* `pequod_k8sapp @ git+https://github.com/pulumi-pequod/pequod-mlc-k8sapp.git#subdirectory=sdk/python/bin`
 
 ### Typescript
 Pequod uses AWS Code Artifact for Typescript package distribution.  
@@ -29,7 +29,7 @@ To install this package use the following:
         "install": "npm run esc:cologin && npm run copkgs:install",
         "esc:cologin": "esc run pequod/aws-access -- npm run co:login",
         "co:login": "aws codeartifact login --tool npm --region us-east-2 --repository pequod-codeartifact-repo --domain pequod-codeartifact-domain",
-        "copkgs:install": "npm i @pequod/stackmgmt --no-save"
+        "copkgs:install": "npm i @pequod/k8sapp --no-save"
     },
 ```
 
@@ -49,12 +49,12 @@ So the `.csproj` should look like the following:
 
     <!-- Set up the github package sources for components used by this template. -->
     <Target Name="AddGithubPackageSources">
-        <Message Text="Adding Pequod.Stackmgmt source" />
-        <Exec Command="./pkg-utils/add_github_pkg.sh Pequod.Stackmgmt pequod/github-package-install" />
+        <Message Text="Adding Pequod.K8sapp source" />
+        <Exec Command="./pkg-utils/add_github_pkg.sh Pequod.K8sapp pequod/github-package-install" />
     </Target> 
 
     <ItemGroup>
-        <PackageReference Include="Pequod.Stackmgmt" Version="*"/>
+        <PackageReference Include="Pequod.K8sapp" Version="*"/>
     </ItemGroup>
 </Project>
 ```

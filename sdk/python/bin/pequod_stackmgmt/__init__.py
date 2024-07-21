@@ -11,11 +11,11 @@ _utilities.register(
     resource_modules="""
 [
  {
-  "pkg": "stackmgmt",
+  "pkg": "k8sapp",
   "mod": "index",
-  "fqn": "pequod_stackmgmt",
+  "fqn": "pequod_k8sapp",
   "classes": {
-   "stackmgmt:index:StackSettings": "StackSettings"
+   "k8sapp:index:ServiceDeployment": "ServiceDeployment"
   }
  }
 ]
@@ -23,9 +23,9 @@ _utilities.register(
     resource_packages="""
 [
  {
-  "pkg": "stackmgmt",
-  "token": "pulumi:providers:stackmgmt",
-  "fqn": "pequod_stackmgmt",
+  "pkg": "k8sapp",
+  "token": "pulumi:providers:k8sapp",
+  "fqn": "pequod_k8sapp",
   "class": "Provider"
  }
 ]

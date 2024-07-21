@@ -60,7 +60,7 @@ To publish a new package:
   * NOTE: Pulumi environment can be used to set these env variables and make life easier.
 * Use the provided helper function: 
   * `./publish_nuget.sh PACKAGE_NAME VERSION`
-    * Where `PACKAGE_NAME` is the name of the package (e.g. `Pequod.Stackmgmt`)
+    * Where `PACKAGE_NAME` is the name of the package (e.g. `Pequod.K8sapp`)
     * Where `VERSION` is the version for the given package as specified in the Makefile (e.g. `3.1.4`).
 
 ### Go
@@ -76,7 +76,7 @@ Easiest way to test is with a Python program.
   * Point it at the branch you are developing on.
   * Create it as a pre-release.
 * Git Clone a python project from pequod and modify the `requirements.txt` to include the tag for the pre-release you created above.
-  * e.g. `pequod_stackmgmt @ git+https://github.com/pulumi-pequod/pequod-mlc-stackmgmt.git@v3.1.1#subdirectory=sdk/python/bin`
+  * e.g. `pequod_k8sapp @ git+https://github.com/pulumi-pequod/pequod-mlc-k8sapp.git@v3.1.1#subdirectory=sdk/python/bin`
     * NOTE the `@v3.1.1` - this would be whatever tag used for the given pre-release.
 
 ## TODOs

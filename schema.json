@@ -1,8 +1,8 @@
 {
-    "name": "stackmgmt",
-    "pluginDownloadURL": "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt",
+    "name": "k8sapp",
+    "pluginDownloadURL": "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp",
     "resources": {
-        "stackmgmt:index:StackSettings": {
+        "k8sapp:index:ServiceDeployment": {
             "isComponent": true,
             "inputProperties": {
                 "ttlTime": {
@@ -46,11 +46,11 @@
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi-pequod/pequod-mlc-stackmgmt/sdk/go/stackmgmt",
+            "importBasePath": "github.com/pulumi-pequod/pequod-mlc-k8sapp/sdk/go/k8sapp",
             "respectSchemaVersion": true
         },
         "nodejs": {
-            "packageName": "@pequod/stackmgmt",
+            "packageName": "@pequod/k8sapp",
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0",
                 "@pulumi/pulumiservice": "^0.20.2",
@@ -66,7 +66,7 @@
             "respectSchemaVersion": true
         },
         "python": {
-            "packageName": "pequod_stackmgmt",
+            "packageName": "pequod_k8sapp",
             "requires": {
                 "pulumi": ">=3.0.0,<4.0.0",
                 "pulumi-pulumiservice": ">=0.0.0,<1.0.0",

@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace Pequod.Stackmgmt
+namespace Pequod.K8sapp
 {
-    [StackmgmtResourceType("stackmgmt:index:StackSettings")]
-    public partial class StackSettings : global::Pulumi.ComponentResource
+    [K8sappResourceType("k8sapp:index:ServiceDeployment")]
+    public partial class ServiceDeployment : global::Pulumi.ComponentResource
     {
         /// <summary>
-        /// Create a StackSettings resource with the given unique name, arguments, and options.
+        /// Create a ServiceDeployment resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public StackSettings(string name, StackSettingsArgs? args = null, ComponentResourceOptions? options = null)
-            : base("stackmgmt:index:StackSettings", name, args ?? new StackSettingsArgs(), MakeResourceOptions(options, ""), remote: true)
+        public ServiceDeployment(string name, ServiceDeploymentArgs? args = null, ComponentResourceOptions? options = null)
+            : base("k8sapp:index:ServiceDeployment", name, args ?? new ServiceDeploymentArgs(), MakeResourceOptions(options, ""), remote: true)
         {
         }
 
@@ -30,7 +30,7 @@ namespace Pequod.Stackmgmt
             var defaultOptions = new ComponentResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt",
+                PluginDownloadURL = "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp",
             };
             var merged = ComponentResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -39,7 +39,7 @@ namespace Pequod.Stackmgmt
         }
     }
 
-    public sealed class StackSettingsArgs : global::Pulumi.ResourceArgs
+    public sealed class ServiceDeploymentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Stack delete setting for automated purge processing.
@@ -71,9 +71,9 @@ namespace Pequod.Stackmgmt
         [Input("ttlTime")]
         public Input<double>? TtlTime { get; set; }
 
-        public StackSettingsArgs()
+        public ServiceDeploymentArgs()
         {
         }
-        public static new StackSettingsArgs Empty => new StackSettingsArgs();
+        public static new ServiceDeploymentArgs Empty => new ServiceDeploymentArgs();
     }
 }

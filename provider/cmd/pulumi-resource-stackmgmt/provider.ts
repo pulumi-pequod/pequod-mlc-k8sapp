@@ -15,7 +15,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as provider from "@pulumi/pulumi/provider";
 
-import { StackSettings, StackSettingsArgs } from "./stackSettings";
+import { ServiceDeployment, ServiceDeploymentArgs } from "./serviceDeployment";
 
 export class Provider implements provider.Provider {
     constructor(readonly version: string, readonly schema: string) { }
@@ -25,23 +25,23 @@ export class Provider implements provider.Provider {
 
         // TODO: Add support for additional component resources here.
         switch (type) {
-            case "stackmgmt:index:StackSettings":
-                return await constructStackSettings(name, inputs, options);
+            case "k8sapp:index:ServiceDeployment":
+                return await constructServiceDeployment(name, inputs, options);
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     }
 }
 
-async function constructStackSettings(name: string, inputs: pulumi.Inputs,
+async function constructServiceDeployment(name: string, inputs: pulumi.Inputs,
     options: pulumi.ComponentResourceOptions): Promise<provider.ConstructResult> {
 
     // Create the component resource.
-    const stackSettings = new StackSettings(name, inputs as StackSettingsArgs, options);
+    const serviceDeployment = new ServiceDeployment(name, inputs as ServiceDeploymentArgs, options);
 
     // Return the component resource's URN and outputs as its state.
     return {
-        urn: stackSettings.urn,
+        urn: serviceDeployment.urn,
         state: {
         },
     };

@@ -1,4 +1,4 @@
-module github.com/pulumi-pequod/pequod-stackmgmt/provider
+module github.com/pulumi-pequod/pequod-k8sapp/provider
 
 go 1.21
 

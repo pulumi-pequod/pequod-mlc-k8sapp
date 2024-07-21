@@ -1,6 +1,6 @@
 VERSION         := 3.2.1
 
-PACK            := stackmgmt
+PACK            := k8sapp
 ORG							:= pulumi-pequod
 PROJECT         := github.com/${ORG}/${PACK}
 

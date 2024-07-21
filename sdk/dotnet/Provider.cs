@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace Pequod.Stackmgmt
+namespace Pequod.K8sapp
 {
-    [StackmgmtResourceType("pulumi:providers:stackmgmt")]
+    [K8sappResourceType("pulumi:providers:k8sapp")]
     public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
@@ -21,7 +21,7 @@ namespace Pequod.Stackmgmt
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Provider(string name, ProviderArgs? args = null, CustomResourceOptions? options = null)
-            : base("stackmgmt", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
+            : base("k8sapp", name, args ?? new ProviderArgs(), MakeResourceOptions(options, ""))
         {
         }
 
@@ -30,7 +30,7 @@ namespace Pequod.Stackmgmt
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
-                PluginDownloadURL = "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt",
+                PluginDownloadURL = "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp",
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.

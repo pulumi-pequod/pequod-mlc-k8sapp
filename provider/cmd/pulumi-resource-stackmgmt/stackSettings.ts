@@ -4,8 +4,8 @@ import * as pulumiservice from "@pulumi/pulumiservice";
 import { local } from "@pulumi/command";
 import fetch from "node-fetch";
 
-// Interface for StackSettings
-export interface StackSettingsArgs{
+// Interface for ServiceDeployment
+export interface ServiceDeploymentArgs{
   ttlMinutes?: number,
   driftManagement?: string,
   deleteStack?: string,
@@ -14,10 +14,10 @@ export interface StackSettingsArgs{
 }
 
 // Forces Pulumi stack settings for managing TTL and other settings.
-export class StackSettings extends pulumi.ComponentResource {
+export class ServiceDeployment extends pulumi.ComponentResource {
 
-  constructor(name: string, args: StackSettingsArgs, opts?: pulumi.ComponentResourceOptions) {
-    super("pequod:stackmgmt:stacksettings", name, args, opts);
+  constructor(name: string, args: ServiceDeploymentArgs, opts?: pulumi.ComponentResourceOptions) {
+    super("pequod:k8sapp:servicedeployment", name, args, opts);
 
     // Settings used below
     const npwStack = "dev" // This is the stack that NPW creates initially.

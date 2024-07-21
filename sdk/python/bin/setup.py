@@ -14,17 +14,17 @@ def readme():
         with open('README.md', encoding='utf-8') as f:
             return f.read()
     except FileNotFoundError:
-        return "stackmgmt Pulumi Package - Development Version"
+        return "k8sapp Pulumi Package - Development Version"
 
 
-setup(name='pequod_stackmgmt',
+setup(name='pequod_k8sapp',
       python_requires='>=3.7',
       version=VERSION,
       long_description=readme(),
       long_description_content_type='text/markdown',
       packages=find_packages(),
       package_data={
-          'pequod_stackmgmt': [
+          'pequod_k8sapp': [
               'py.typed',
               'pulumi-plugin.json',
           ]

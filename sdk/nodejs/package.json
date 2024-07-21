@@ -1,5 +1,5 @@
 {
-    "name": "@pequod/stackmgmt",
+    "name": "@pequod/k8sapp",
     "version": "${VERSION}",
     "scripts": {
         "build": "tsc"
@@ -18,7 +18,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "stackmgmt",
-        "server": "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt"
+        "name": "k8sapp",
+        "server": "github://api.github.com/pulumi-pequod/pequod-mlc-k8sapp"
     }
 }
