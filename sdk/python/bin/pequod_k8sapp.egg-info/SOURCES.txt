@@ -5,7 +5,7 @@ pequod_k8sapp/_utilities.py
 pequod_k8sapp/provider.py
 pequod_k8sapp/pulumi-plugin.json
 pequod_k8sapp/py.typed
-pequod_k8sapp/stack_settings.py
+pequod_k8sapp/service_deployment.py
 pequod_k8sapp.egg-info/PKG-INFO
 pequod_k8sapp.egg-info/SOURCES.txt
 pequod_k8sapp.egg-info/dependency_links.txt

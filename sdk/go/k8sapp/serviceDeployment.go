@@ -7,21 +7,31 @@ import (
 	"context"
 	"reflect"
 
+	"errors"
 	"github.com/pulumi-pequod/pequod-mlc-k8sapp/sdk/go/k8sapp/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 type ServiceDeployment struct {
 	pulumi.ResourceState
+
+	// Frontend IP address.
+	FrontendIp pulumi.StringOutput `pulumi:"frontendIp"`
 }
 
 // NewServiceDeployment registers a new resource with the given unique name, arguments, and options.
 func NewServiceDeployment(ctx *pulumi.Context,
 	name string, args *ServiceDeploymentArgs, opts ...pulumi.ResourceOption) (*ServiceDeployment, error) {
 	if args == nil {
-		args = &ServiceDeploymentArgs{}
+		return nil, errors.New("missing one or more required arguments")
 	}
 
+	if args.Image == nil {
+		return nil, errors.New("invalid value for required argument 'Image'")
+	}
+	if args.Namespace == nil {
+		return nil, errors.New("invalid value for required argument 'Namespace'")
+	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ServiceDeployment
 	err := ctx.RegisterRemoteComponentResource("k8sapp:index:ServiceDeployment", name, args, &resource, opts...)
@@ -32,30 +42,38 @@ func NewServiceDeployment(ctx *pulumi.Context,
 }
 
 type serviceDeploymentArgs struct {
-	// Stack delete setting for automated purge processing.
-	DeleteStack *string `pulumi:"deleteStack"`
-	// Drift management setting for refresh or correction.
-	DriftManagement *string `pulumi:"driftManagement"`
-	// Pulumi access token to set up as a deployment environment variable if provided.
-	PulumiAccessToken *string `pulumi:"pulumiAccessToken"`
-	// Team to which the stack should be assigned.
-	TeamAssignment *string `pulumi:"teamAssignment"`
-	// Time to live time setting.
-	TtlTime *float64 `pulumi:"ttlTime"`
+	// Allocate an IP address for the service.
+	AllocationIpAddress *bool `pulumi:"allocationIpAddress"`
+	// Docker image to deploy.
+	Image string `pulumi:"image"`
+	// Using minikube.
+	IsMinikube *bool `pulumi:"isMinikube"`
+	// K8s namespace in which to deploy.
+	Namespace string `pulumi:"namespace"`
+	// Container ports.
+	Port map[string]string `pulumi:"port"`
+	// Number of replicas to deploy.
+	Replicas *float64 `pulumi:"replicas"`
+	// Resource requirements for the container.
+	Resources map[string]string `pulumi:"resources"`
 }
 
 // The set of arguments for constructing a ServiceDeployment resource.
 type ServiceDeploymentArgs struct {
-	// Stack delete setting for automated purge processing.
-	DeleteStack pulumi.StringPtrInput
-	// Drift management setting for refresh or correction.
-	DriftManagement pulumi.StringPtrInput
-	// Pulumi access token to set up as a deployment environment variable if provided.
-	PulumiAccessToken pulumi.StringPtrInput
-	// Team to which the stack should be assigned.
-	TeamAssignment pulumi.StringPtrInput
-	// Time to live time setting.
-	TtlTime pulumi.Float64PtrInput
+	// Allocate an IP address for the service.
+	AllocationIpAddress pulumi.BoolPtrInput
+	// Docker image to deploy.
+	Image pulumi.StringInput
+	// Using minikube.
+	IsMinikube pulumi.BoolPtrInput
+	// K8s namespace in which to deploy.
+	Namespace pulumi.StringInput
+	// Container ports.
+	Port pulumi.StringMapInput
+	// Number of replicas to deploy.
+	Replicas pulumi.Float64PtrInput
+	// Resource requirements for the container.
+	Resources pulumi.StringMapInput
 }
 
 func (ServiceDeploymentArgs) ElementType() reflect.Type {
@@ -141,8 +159,13 @@ func (o ServiceDeploymentOutput) ToServiceDeploymentOutput() ServiceDeploymentOu
 	return o
 }
 
-func (o ServiceDeploymentOutput) ToServiceDeploymentOutputWithContext(ctx context.Context) ServiceDeploymentmentOutput {
+func (o ServiceDeploymentOutput) ToServiceDeploymentOutputWithContext(ctx context.Context) ServiceDeploymentOutput {
 	return o
+}
+
+// Frontend IP address.
+func (o ServiceDeploymentOutput) FrontendIp() pulumi.StringOutput {
+	return o.ApplyT(func(v *ServiceDeployment) pulumi.StringOutput { return v.FrontendIp }).(pulumi.StringOutput)
 }
 
 type ServiceDeploymentArrayOutput struct{ *pulumi.OutputState }
@@ -155,13 +178,13 @@ func (o ServiceDeploymentArrayOutput) ToServiceDeploymentArrayOutput() ServiceDe
 	return o
 }
 
-func (o ServiceDeploymentmentArrayOutput) ToServiceDeploymentArrayOutputWithContext(ctx context.Context) ServiceDeploymentArrayOutput {
+func (o ServiceDeploymentArrayOutput) ToServiceDeploymentArrayOutputWithContext(ctx context.Context) ServiceDeploymentArrayOutput {
 	return o
 }
 
 func (o ServiceDeploymentArrayOutput) Index(i pulumi.IntInput) ServiceDeploymentOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ServiceDeployment {
-		return vs[0].([]*ServiceDeploymentment)[vs[1].(int)]
+		return vs[0].([]*ServiceDeployment)[vs[1].(int)]
 	}).(ServiceDeploymentOutput)
 }
 

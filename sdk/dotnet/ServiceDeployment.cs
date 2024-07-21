@@ -14,13 +14,20 @@ namespace Pequod.K8sapp
     public partial class ServiceDeployment : global::Pulumi.ComponentResource
     {
         /// <summary>
+        /// Frontend IP address.
+        /// </summary>
+        [Output("frontendIp")]
+        public Output<string> FrontendIp { get; private set; } = null!;
+
+
+        /// <summary>
         /// Create a ServiceDeployment resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public ServiceDeployment(string name, ServiceDeploymentArgs? args = null, ComponentResourceOptions? options = null)
+        public ServiceDeployment(string name, ServiceDeploymentArgs args, ComponentResourceOptions? options = null)
             : base("k8sapp:index:ServiceDeployment", name, args ?? new ServiceDeploymentArgs(), MakeResourceOptions(options, ""), remote: true)
         {
         }
@@ -42,34 +49,58 @@ namespace Pequod.K8sapp
     public sealed class ServiceDeploymentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Stack delete setting for automated purge processing.
+        /// Allocate an IP address for the service.
         /// </summary>
-        [Input("deleteStack")]
-        public Input<string>? DeleteStack { get; set; }
+        [Input("allocationIpAddress")]
+        public Input<bool>? AllocationIpAddress { get; set; }
 
         /// <summary>
-        /// Drift management setting for refresh or correction.
+        /// Docker image to deploy.
         /// </summary>
-        [Input("driftManagement")]
-        public Input<string>? DriftManagement { get; set; }
+        [Input("image", required: true)]
+        public Input<string> Image { get; set; } = null!;
 
         /// <summary>
-        /// Pulumi access token to set up as a deployment environment variable if provided.
+        /// Using minikube.
         /// </summary>
-        [Input("pulumiAccessToken")]
-        public Input<string>? PulumiAccessToken { get; set; }
+        [Input("isMinikube")]
+        public Input<bool>? IsMinikube { get; set; }
 
         /// <summary>
-        /// Team to which the stack should be assigned.
+        /// K8s namespace in which to deploy.
         /// </summary>
-        [Input("teamAssignment")]
-        public Input<string>? TeamAssignment { get; set; }
+        [Input("namespace", required: true)]
+        public Input<string> Namespace { get; set; } = null!;
+
+        [Input("port")]
+        private InputMap<string>? _port;
 
         /// <summary>
-        /// Time to live time setting.
+        /// Container ports.
         /// </summary>
-        [Input("ttlTime")]
-        public Input<double>? TtlTime { get; set; }
+        public InputMap<string> Port
+        {
+            get => _port ?? (_port = new InputMap<string>());
+            set => _port = value;
+        }
+
+        /// <summary>
+        /// Number of replicas to deploy.
+        /// </summary>
+        [Input("replicas")]
+        public Input<double>? Replicas { get; set; }
+
+        [Input("resources")]
+        private InputMap<string>? _resources;
+
+        /// <summary>
+        /// Resource requirements for the container.
+        /// </summary>
+        public InputMap<string> Resources
+        {
+            get => _resources ?? (_resources = new InputMap<string>());
+            set => _resources = value;
+        }
 
         public ServiceDeploymentArgs()
         {

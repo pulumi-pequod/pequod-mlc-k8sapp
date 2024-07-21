@@ -5,32 +5,47 @@
         "k8sapp:index:ServiceDeployment": {
             "isComponent": true,
             "inputProperties": {
-                "ttlTime": {
+                "replicas": {
                     "type": "number",
-                    "description": "Time to live time setting."
+                    "description": "Number of replicas to deploy."
                 },
-                "driftManagement": {
-                    "type": "string",
-                    "description": "Drift management setting for refresh or correction."
+                "resources": {
+                    "type": "object",
+                    "description": "Resource requirements for the container."
                 },
-                "deleteStack": {
+                "image": {
                     "type": "string",
-                    "description": "Stack delete setting for automated purge processing."
+                    "description": "Docker image to deploy."
                 },
-                "teamAssignment": {
+                "namespace": {
                     "type": "string",
-                    "description": "Team to which the stack should be assigned."
+                    "description": "K8s namespace in which to deploy."
                 },
-                "pulumiAccessToken": {
-                    "type": "string",
-                    "description": "Pulumi access token to set up as a deployment environment variable if provided."
+                "port": {
+                    "type": "object",
+                    "description": "Container ports."
+                },
+                "allocationIpAddress": {
+                    "type": "boolean",
+                    "description": "Allocate an IP address for the service."
+                },
+                "isMinikube": {
+                    "type": "boolean",
+                    "description": "Using minikube."
                 }
             },
             "requiredInputs": [
+                "image",
+                "namespace"
             ],
             "properties": {
+                "frontendIp": {
+                    "type": "string",
+                    "description": "Frontend IP address."
+                }
             },
             "required": [
+                "frontendIp"
             ]
         }
     },
@@ -39,8 +54,7 @@
             "rootNamespace": "Pequod",
             "packageReferences": {
                 "Pulumi": "3.*",
-                "Pulumi.PulumiService": "0.*",
-                "Pulumi.Command": "0.*"
+                "Pulumi.Kubernetes": "4.*"
             },
             "respectSchemaVersion": true
         },
@@ -53,10 +67,7 @@
             "packageName": "@pequod/k8sapp",
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0",
-                "@pulumi/pulumiservice": "^0.20.2",
-                "@pulumi/command": "^0.10.0",
-                "@types/node-fetch": "^2.6.2",
-                "node-fetch": "^2.6.2"
+                "@pulumi/kubernetes": "^4.0.0"
             },
             "devDependencies": {
                 "@types/node": "^10.0.0",
@@ -69,8 +80,7 @@
             "packageName": "pequod_k8sapp",
             "requires": {
                 "pulumi": ">=3.0.0,<4.0.0",
-                "pulumi-pulumiservice": ">=0.0.0,<1.0.0",
-                "pulumi-command": ">=0.0.0,<1.0.0"
+                "pulumi-kubernetes": ">=4.0.0,<5.0.0"
             },
             "respectSchemaVersion": true
         }

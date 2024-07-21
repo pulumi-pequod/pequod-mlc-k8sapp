@@ -6,7 +6,7 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from .provider import *
-from .stack_settings import *
+from .service_deployment import *
 _utilities.register(
     resource_modules="""
 [
