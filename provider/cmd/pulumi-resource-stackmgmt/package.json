@@ -1,0 +1,16 @@
+{
+    "version": "${VERSION}",
+    "bin": "bin/index.js",
+    "dependencies": {
+        "@pulumi/command": "^0.9.2",
+        "@pulumi/pulumi": "^3.0.0",
+        "@pulumi/pulumiservice": "^0.20.2",
+        "@types/node-fetch": "^2.6.2",
+        "node-fetch": "^2.6.2"
+    },
+    "devDependencies": {
+        "@types/node": "^10.0.0",
+        "pkg": "^5.6.0",
+        "typescript": "^4.6.3"
+    }
+}

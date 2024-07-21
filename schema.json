@@ -1,0 +1,78 @@
+{
+    "name": "stackmgmt",
+    "pluginDownloadURL": "github://api.github.com/pulumi-pequod/pequod-mlc-stackmgmt",
+    "resources": {
+        "stackmgmt:index:StackSettings": {
+            "isComponent": true,
+            "inputProperties": {
+                "ttlTime": {
+                    "type": "number",
+                    "description": "Time to live time setting."
+                },
+                "driftManagement": {
+                    "type": "string",
+                    "description": "Drift management setting for refresh or correction."
+                },
+                "deleteStack": {
+                    "type": "string",
+                    "description": "Stack delete setting for automated purge processing."
+                },
+                "teamAssignment": {
+                    "type": "string",
+                    "description": "Team to which the stack should be assigned."
+                },
+                "pulumiAccessToken": {
+                    "type": "string",
+                    "description": "Pulumi access token to set up as a deployment environment variable if provided."
+                }
+            },
+            "requiredInputs": [
+            ],
+            "properties": {
+            },
+            "required": [
+            ]
+        }
+    },
+    "language": {
+        "csharp": {
+            "rootNamespace": "Pequod",
+            "packageReferences": {
+                "Pulumi": "3.*",
+                "Pulumi.PulumiService": "0.*",
+                "Pulumi.Command": "0.*"
+            },
+            "respectSchemaVersion": true
+        },
+        "go": {
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/pulumi-pequod/pequod-mlc-stackmgmt/sdk/go/stackmgmt",
+            "respectSchemaVersion": true
+        },
+        "nodejs": {
+            "packageName": "@pequod/stackmgmt",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0",
+                "@pulumi/pulumiservice": "^0.20.2",
+                "@pulumi/command": "^0.10.0",
+                "@types/node-fetch": "^2.6.2",
+                "node-fetch": "^2.6.2"
+            },
+            "devDependencies": {
+                "@types/node": "^10.0.0",
+                "pkg": "^5.6.0",
+                "typescript": "^4.6.3"
+            },
+            "respectSchemaVersion": true
+        },
+        "python": {
+            "packageName": "pequod_stackmgmt",
+            "requires": {
+                "pulumi": ">=3.0.0,<4.0.0",
+                "pulumi-pulumiservice": ">=0.0.0,<1.0.0",
+                "pulumi-command": ">=0.0.0,<1.0.0"
+            },
+            "respectSchemaVersion": true
+        }
+    }
+}

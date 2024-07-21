@@ -1,0 +1,25 @@
+.pulumi
+# Keep python bin for package references via github for the time being at least
+**/bin/
+!/sdk/python/**
+**/obj/
+**/node_modules/
+vendor/
+**/Pulumi.*.yaml
+**/yarn-error.log
+yarn.lock
+package-lock.json
+.idea/
+**/version.txt
+**/dist
+nuget/
+**/build
+dist/
+.DS_Store
+
+ci-scripts/
+# *.tar.gz
+
+# This is an artifact only so that we can pass the
+# schema for the provider GetSchema gRPC request
+/provider/cmd/pulumi-resource-*/schema.json
