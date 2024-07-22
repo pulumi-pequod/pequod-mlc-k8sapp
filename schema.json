@@ -37,10 +37,11 @@
             "properties": {
                 "ipAddress": {
                     "type": "string",
-                    "description": "Frontend IP address."
+                    "description": "ServieDeployment IP address."
                 }
             },
             "required": [
+                "ipAddress"
             ]
         }
     },

@@ -196,9 +196,9 @@ class ServiceDeployment(pulumi.ComponentResource):
 
     @property
     @pulumi.getter(name="ipAddress")
-    def ip_address(self) -> pulumi.Output[Optional[str]]:
+    def ip_address(self) -> pulumi.Output[str]:
         """
-        Frontend IP address.
+        ServieDeployment IP address.
         """
         return pulumi.get(self, "ip_address")
 

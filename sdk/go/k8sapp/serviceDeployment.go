@@ -15,8 +15,8 @@ import (
 type ServiceDeployment struct {
 	pulumi.ResourceState
 
-	// Frontend IP address.
-	IpAddress pulumi.StringPtrOutput `pulumi:"ipAddress"`
+	// ServieDeployment IP address.
+	IpAddress pulumi.StringOutput `pulumi:"ipAddress"`
 }
 
 // NewServiceDeployment registers a new resource with the given unique name, arguments, and options.
@@ -159,9 +159,9 @@ func (o ServiceDeploymentOutput) ToServiceDeploymentOutputWithContext(ctx contex
 	return o
 }
 
-// Frontend IP address.
-func (o ServiceDeploymentOutput) IpAddress() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ServiceDeployment) pulumi.StringPtrOutput { return v.IpAddress }).(pulumi.StringPtrOutput)
+// ServieDeployment IP address.
+func (o ServiceDeploymentOutput) IpAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v *ServiceDeployment) pulumi.StringOutput { return v.IpAddress }).(pulumi.StringOutput)
 }
 
 type ServiceDeploymentArrayOutput struct{ *pulumi.OutputState }

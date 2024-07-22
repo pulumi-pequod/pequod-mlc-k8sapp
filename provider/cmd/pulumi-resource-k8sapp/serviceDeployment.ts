@@ -7,9 +7,7 @@ import * as pulumi from "@pulumi/pulumi";
  * Kubernetes Deployment and its associated Service object.
  */
 export class ServiceDeployment extends pulumi.ComponentResource {
-    public readonly deployment: k8s.apps.v1.Deployment;
-    public readonly service: k8s.core.v1.Service;
-    public ipAddress?: pulumi.Output<string>;
+    public readonly ipAddress?: pulumi.Output<string>;
 
     constructor(name: string, args: ServiceDeploymentArgs, opts?: pulumi.ComponentResourceOptions) {
         super("pequod:k8sapp:ServiceDeployment", name, {}, opts);
@@ -25,7 +23,7 @@ export class ServiceDeployment extends pulumi.ComponentResource {
             env: [{ name: "GET_HOSTS_FROM", value: "dns" }],
             ports: [{ containerPort: containerPort}],
         };
-        this.deployment = new k8s.apps.v1.Deployment(name, {
+        const deployment = new k8s.apps.v1.Deployment(name, {
             metadata: {
                 namespace: namespace
             },
@@ -39,27 +37,27 @@ export class ServiceDeployment extends pulumi.ComponentResource {
             },
         }, { parent: this });
 
-        this.service = new k8s.core.v1.Service(name, {
+        const service = new k8s.core.v1.Service(name, {
             metadata: {
                 name: name,
                 namespace: namespace,
-                labels: this.deployment.metadata.labels,
+                labels: deployment.metadata.labels,
             },
             spec: {
                 ports: [ { port: containerPort, targetPort: containerPort}], 
-                selector: this.deployment.spec.template.metadata.labels,
+                selector: deployment.spec.template.metadata.labels,
                 // Minikube does not implement services of type `LoadBalancer`; require the user to specify if we're
                 // running on minikube, and if so, create only services of type ClusterIP.
                 type: args.allocateIpAddress ? (args.isMinikube ? "ClusterIP" : "LoadBalancer") : undefined,
             },
         }, { parent: this });
 
-        this.ipAddress = pulumi.output("undefined")
+        // this.ipAddress = pulumi.output("undefined")
         if (args.allocateIpAddress) {
             if (args.isMinikube) {
-                this.ipAddress = this.service.spec.clusterIP 
+                this.ipAddress = service.spec.clusterIP 
             } else {
-                const ingress = this.service.status.apply(status => status.loadBalancer.ingress[0])
+                const ingress = service.status.apply(status => status.loadBalancer.ingress[0])
                 this.ipAddress = ingress.apply(ingress => ingress.ip || ingress.hostname || "")
             }
         }

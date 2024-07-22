@@ -14,10 +14,10 @@ namespace Pequod.K8sapp
     public partial class ServiceDeployment : global::Pulumi.ComponentResource
     {
         /// <summary>
-        /// Frontend IP address.
+        /// ServieDeployment IP address.
         /// </summary>
         [Output("ipAddress")]
-        public Output<string?> IpAddress { get; private set; } = null!;
+        public Output<string> IpAddress { get; private set; } = null!;
 
 
         /// <summary>

@@ -20,9 +20,9 @@ export class ServiceDeployment extends pulumi.ComponentResource {
     }
 
     /**
-     * Frontend IP address.
+     * ServieDeployment IP address.
      */
-    public /*out*/ readonly ipAddress!: pulumi.Output<string | undefined>;
+    public /*out*/ readonly ipAddress!: pulumi.Output<string>;
 
     /**
      * Create a ServiceDeployment resource with the given unique name, arguments, and options.
