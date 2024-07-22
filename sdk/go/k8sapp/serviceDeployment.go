@@ -16,7 +16,7 @@ type ServiceDeployment struct {
 	pulumi.ResourceState
 
 	// Frontend IP address.
-	FrontendIp pulumi.StringOutput `pulumi:"frontendIp"`
+	IpAddress pulumi.StringPtrOutput `pulumi:"ipAddress"`
 }
 
 // NewServiceDeployment registers a new resource with the given unique name, arguments, and options.
@@ -43,7 +43,7 @@ func NewServiceDeployment(ctx *pulumi.Context,
 
 type serviceDeploymentArgs struct {
 	// Allocate an IP address for the service.
-	AllocationIpAddress *bool `pulumi:"allocationIpAddress"`
+	AllocateIpAddress *bool `pulumi:"allocateIpAddress"`
 	// Docker image to deploy.
 	Image string `pulumi:"image"`
 	// Using minikube.
@@ -59,7 +59,7 @@ type serviceDeploymentArgs struct {
 // The set of arguments for constructing a ServiceDeployment resource.
 type ServiceDeploymentArgs struct {
 	// Allocate an IP address for the service.
-	AllocationIpAddress pulumi.BoolPtrInput
+	AllocateIpAddress pulumi.BoolPtrInput
 	// Docker image to deploy.
 	Image pulumi.StringInput
 	// Using minikube.
@@ -160,8 +160,8 @@ func (o ServiceDeploymentOutput) ToServiceDeploymentOutputWithContext(ctx contex
 }
 
 // Frontend IP address.
-func (o ServiceDeploymentOutput) FrontendIp() pulumi.StringOutput {
-	return o.ApplyT(func(v *ServiceDeployment) pulumi.StringOutput { return v.FrontendIp }).(pulumi.StringOutput)
+func (o ServiceDeploymentOutput) IpAddress() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ServiceDeployment) pulumi.StringPtrOutput { return v.IpAddress }).(pulumi.StringPtrOutput)
 }
 
 type ServiceDeploymentArrayOutput struct{ *pulumi.OutputState }

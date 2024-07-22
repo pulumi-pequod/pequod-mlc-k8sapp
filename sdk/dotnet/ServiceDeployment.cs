@@ -16,8 +16,8 @@ namespace Pequod.K8sapp
         /// <summary>
         /// Frontend IP address.
         /// </summary>
-        [Output("frontendIp")]
-        public Output<string> FrontendIp { get; private set; } = null!;
+        [Output("ipAddress")]
+        public Output<string?> IpAddress { get; private set; } = null!;
 
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace Pequod.K8sapp
         /// <summary>
         /// Allocate an IP address for the service.
         /// </summary>
-        [Input("allocationIpAddress")]
-        public Input<bool>? AllocationIpAddress { get; set; }
+        [Input("allocateIpAddress")]
+        public Input<bool>? AllocateIpAddress { get; set; }
 
         /// <summary>
         /// Docker image to deploy.

@@ -16,7 +16,7 @@ class ServiceDeploymentArgs:
     def __init__(__self__, *,
                  image: pulumi.Input[str],
                  namespace: pulumi.Input[str],
-                 allocation_ip_address: Optional[pulumi.Input[bool]] = None,
+                 allocate_ip_address: Optional[pulumi.Input[bool]] = None,
                  is_minikube: Optional[pulumi.Input[bool]] = None,
                  port: Optional[pulumi.Input[float]] = None,
                  replicas: Optional[pulumi.Input[float]] = None):
@@ -24,15 +24,15 @@ class ServiceDeploymentArgs:
         The set of arguments for constructing a ServiceDeployment resource.
         :param pulumi.Input[str] image: Docker image to deploy.
         :param pulumi.Input[str] namespace: K8s namespace in which to deploy.
-        :param pulumi.Input[bool] allocation_ip_address: Allocate an IP address for the service.
+        :param pulumi.Input[bool] allocate_ip_address: Allocate an IP address for the service.
         :param pulumi.Input[bool] is_minikube: Using minikube.
         :param pulumi.Input[float] port: Container port.
         :param pulumi.Input[float] replicas: Number of replicas to deploy.
         """
         pulumi.set(__self__, "image", image)
         pulumi.set(__self__, "namespace", namespace)
-        if allocation_ip_address is not None:
-            pulumi.set(__self__, "allocation_ip_address", allocation_ip_address)
+        if allocate_ip_address is not None:
+            pulumi.set(__self__, "allocate_ip_address", allocate_ip_address)
         if is_minikube is not None:
             pulumi.set(__self__, "is_minikube", is_minikube)
         if port is not None:
@@ -65,16 +65,16 @@ class ServiceDeploymentArgs:
         pulumi.set(self, "namespace", value)
 
     @property
-    @pulumi.getter(name="allocationIpAddress")
-    def allocation_ip_address(self) -> Optional[pulumi.Input[bool]]:
+    @pulumi.getter(name="allocateIpAddress")
+    def allocate_ip_address(self) -> Optional[pulumi.Input[bool]]:
         """
         Allocate an IP address for the service.
         """
-        return pulumi.get(self, "allocation_ip_address")
+        return pulumi.get(self, "allocate_ip_address")
 
-    @allocation_ip_address.setter
-    def allocation_ip_address(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "allocation_ip_address", value)
+    @allocate_ip_address.setter
+    def allocate_ip_address(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allocate_ip_address", value)
 
     @property
     @pulumi.getter(name="isMinikube")
@@ -118,7 +118,7 @@ class ServiceDeployment(pulumi.ComponentResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 allocation_ip_address: Optional[pulumi.Input[bool]] = None,
+                 allocate_ip_address: Optional[pulumi.Input[bool]] = None,
                  image: Optional[pulumi.Input[str]] = None,
                  is_minikube: Optional[pulumi.Input[bool]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
@@ -129,7 +129,7 @@ class ServiceDeployment(pulumi.ComponentResource):
         Create a ServiceDeployment resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[bool] allocation_ip_address: Allocate an IP address for the service.
+        :param pulumi.Input[bool] allocate_ip_address: Allocate an IP address for the service.
         :param pulumi.Input[str] image: Docker image to deploy.
         :param pulumi.Input[bool] is_minikube: Using minikube.
         :param pulumi.Input[str] namespace: K8s namespace in which to deploy.
@@ -159,7 +159,7 @@ class ServiceDeployment(pulumi.ComponentResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 allocation_ip_address: Optional[pulumi.Input[bool]] = None,
+                 allocate_ip_address: Optional[pulumi.Input[bool]] = None,
                  image: Optional[pulumi.Input[str]] = None,
                  is_minikube: Optional[pulumi.Input[bool]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
@@ -176,7 +176,7 @@ class ServiceDeployment(pulumi.ComponentResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ServiceDeploymentArgs.__new__(ServiceDeploymentArgs)
 
-            __props__.__dict__["allocation_ip_address"] = allocation_ip_address
+            __props__.__dict__["allocate_ip_address"] = allocate_ip_address
             if image is None and not opts.urn:
                 raise TypeError("Missing required property 'image'")
             __props__.__dict__["image"] = image
@@ -186,7 +186,7 @@ class ServiceDeployment(pulumi.ComponentResource):
             __props__.__dict__["namespace"] = namespace
             __props__.__dict__["port"] = port
             __props__.__dict__["replicas"] = replicas
-            __props__.__dict__["frontend_ip"] = None
+            __props__.__dict__["ip_address"] = None
         super(ServiceDeployment, __self__).__init__(
             'k8sapp:index:ServiceDeployment',
             resource_name,
@@ -195,10 +195,10 @@ class ServiceDeployment(pulumi.ComponentResource):
             remote=True)
 
     @property
-    @pulumi.getter(name="frontendIp")
-    def frontend_ip(self) -> pulumi.Output[str]:
+    @pulumi.getter(name="ipAddress")
+    def ip_address(self) -> pulumi.Output[Optional[str]]:
         """
         Frontend IP address.
         """
-        return pulumi.get(self, "frontend_ip")
+        return pulumi.get(self, "ip_address")
 

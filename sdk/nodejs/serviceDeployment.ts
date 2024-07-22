@@ -22,7 +22,7 @@ export class ServiceDeployment extends pulumi.ComponentResource {
     /**
      * Frontend IP address.
      */
-    public /*out*/ readonly frontendIp!: pulumi.Output<string>;
+    public /*out*/ readonly ipAddress!: pulumi.Output<string | undefined>;
 
     /**
      * Create a ServiceDeployment resource with the given unique name, arguments, and options.
@@ -41,15 +41,15 @@ export class ServiceDeployment extends pulumi.ComponentResource {
             if ((!args || args.namespace === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'namespace'");
             }
-            resourceInputs["allocationIpAddress"] = args ? args.allocationIpAddress : undefined;
+            resourceInputs["allocateIpAddress"] = args ? args.allocateIpAddress : undefined;
             resourceInputs["image"] = args ? args.image : undefined;
             resourceInputs["isMinikube"] = args ? args.isMinikube : undefined;
             resourceInputs["namespace"] = args ? args.namespace : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["replicas"] = args ? args.replicas : undefined;
-            resourceInputs["frontendIp"] = undefined /*out*/;
+            resourceInputs["ipAddress"] = undefined /*out*/;
         } else {
-            resourceInputs["frontendIp"] = undefined /*out*/;
+            resourceInputs["ipAddress"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ServiceDeployment.__pulumiType, name, resourceInputs, opts, true /*remote*/);
@@ -63,7 +63,7 @@ export interface ServiceDeploymentArgs {
     /**
      * Allocate an IP address for the service.
      */
-    allocationIpAddress?: pulumi.Input<boolean>;
+    allocateIpAddress?: pulumi.Input<boolean>;
     /**
      * Docker image to deploy.
      */

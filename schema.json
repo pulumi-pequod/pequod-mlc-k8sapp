@@ -21,7 +21,7 @@
                     "type": "number",
                     "description": "Container port."
                 },
-                "allocationIpAddress": {
+                "allocateIpAddress": {
                     "type": "boolean",
                     "description": "Allocate an IP address for the service."
                 },
@@ -35,13 +35,12 @@
                 "namespace"
             ],
             "properties": {
-                "frontendIp": {
+                "ipAddress": {
                     "type": "string",
                     "description": "Frontend IP address."
                 }
             },
             "required": [
-                "frontendIp"
             ]
         }
     },
