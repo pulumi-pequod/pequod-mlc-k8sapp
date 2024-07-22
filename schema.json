@@ -9,10 +9,6 @@
                     "type": "number",
                     "description": "Number of replicas to deploy."
                 },
-                "resources": {
-                    "type": "object",
-                    "description": "Resource requirements for the container."
-                },
                 "image": {
                     "type": "string",
                     "description": "Docker image to deploy."
@@ -21,9 +17,9 @@
                     "type": "string",
                     "description": "K8s namespace in which to deploy."
                 },
-                "ports": {
-                    "type": "object",
-                    "description": "Container ports."
+                "port": {
+                    "type": "number",
+                    "description": "Container port."
                 },
                 "allocationIpAddress": {
                     "type": "boolean",

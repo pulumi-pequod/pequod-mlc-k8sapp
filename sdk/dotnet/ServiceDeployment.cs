@@ -72,35 +72,17 @@ namespace Pequod.K8sapp
         [Input("namespace", required: true)]
         public Input<string> Namespace { get; set; } = null!;
 
-        [Input("ports")]
-        private InputMap<string>? _ports;
-
         /// <summary>
-        /// Container ports.
+        /// Container port.
         /// </summary>
-        public InputMap<string> Ports
-        {
-            get => _ports ?? (_ports = new InputMap<string>());
-            set => _ports = value;
-        }
+        [Input("port")]
+        public Input<double>? Port { get; set; }
 
         /// <summary>
         /// Number of replicas to deploy.
         /// </summary>
         [Input("replicas")]
         public Input<double>? Replicas { get; set; }
-
-        [Input("resources")]
-        private InputMap<string>? _resources;
-
-        /// <summary>
-        /// Resource requirements for the container.
-        /// </summary>
-        public InputMap<string> Resources
-        {
-            get => _resources ?? (_resources = new InputMap<string>());
-            set => _resources = value;
-        }
 
         public ServiceDeploymentArgs()
         {

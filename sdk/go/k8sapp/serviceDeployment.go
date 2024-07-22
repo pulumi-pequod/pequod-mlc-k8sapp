@@ -50,12 +50,10 @@ type serviceDeploymentArgs struct {
 	IsMinikube *bool `pulumi:"isMinikube"`
 	// K8s namespace in which to deploy.
 	Namespace string `pulumi:"namespace"`
-	// Container ports.
-	Ports map[string]string `pulumi:"ports"`
+	// Container port.
+	Port *float64 `pulumi:"port"`
 	// Number of replicas to deploy.
 	Replicas *float64 `pulumi:"replicas"`
-	// Resource requirements for the container.
-	Resources map[string]string `pulumi:"resources"`
 }
 
 // The set of arguments for constructing a ServiceDeployment resource.
@@ -68,12 +66,10 @@ type ServiceDeploymentArgs struct {
 	IsMinikube pulumi.BoolPtrInput
 	// K8s namespace in which to deploy.
 	Namespace pulumi.StringInput
-	// Container ports.
-	Ports pulumi.StringMapInput
+	// Container port.
+	Port pulumi.Float64PtrInput
 	// Number of replicas to deploy.
 	Replicas pulumi.Float64PtrInput
-	// Resource requirements for the container.
-	Resources pulumi.StringMapInput
 }
 
 func (ServiceDeploymentArgs) ElementType() reflect.Type {
