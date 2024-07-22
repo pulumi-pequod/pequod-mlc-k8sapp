@@ -43,6 +43,7 @@ async function constructServiceDeployment(name: string, inputs: pulumi.Inputs,
     return {
         urn: serviceDeployment.urn,
         state: {
+            ipAddress: serviceDeployment.ipAddress
         },
     };
 }

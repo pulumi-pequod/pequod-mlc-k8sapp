@@ -7,7 +7,7 @@ import * as pulumi from "@pulumi/pulumi";
  * Kubernetes Deployment and its associated Service object.
  */
 export class ServiceDeployment extends pulumi.ComponentResource {
-    public readonly ipAddress?: pulumi.Output<string>;
+    public readonly ipAddress: pulumi.Output<string>;
 
     constructor(name: string, args: ServiceDeploymentArgs, opts?: pulumi.ComponentResourceOptions) {
         super("pequod:k8sapp:ServiceDeployment", name, {}, opts);
@@ -52,6 +52,7 @@ export class ServiceDeployment extends pulumi.ComponentResource {
             },
         }, { parent: this });
 
+        this.ipAddress = pulumi.output("no_ip_set")
         if (args.allocateIpAddress) {
             if (args.isMinikube) {
                 this.ipAddress = service.spec.clusterIP 
