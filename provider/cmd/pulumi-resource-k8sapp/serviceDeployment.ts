@@ -52,7 +52,6 @@ export class ServiceDeployment extends pulumi.ComponentResource {
             },
         }, { parent: this });
 
-        // this.ipAddress = pulumi.output("undefined")
         if (args.allocateIpAddress) {
             if (args.isMinikube) {
                 this.ipAddress = service.spec.clusterIP 
@@ -61,6 +60,7 @@ export class ServiceDeployment extends pulumi.ComponentResource {
                 this.ipAddress = ingress.apply(ingress => ingress.ip || ingress.hostname || "")
             }
         }
+        this.registerOutputs({});
     }
 }
 
