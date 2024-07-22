@@ -21,7 +21,7 @@
                     "type": "string",
                     "description": "K8s namespace in which to deploy."
                 },
-                "port": {
+                "ports": {
                     "type": "object",
                     "description": "Container ports."
                 },

@@ -45,7 +45,7 @@ export class ServiceDeployment extends pulumi.ComponentResource {
             resourceInputs["image"] = args ? args.image : undefined;
             resourceInputs["isMinikube"] = args ? args.isMinikube : undefined;
             resourceInputs["namespace"] = args ? args.namespace : undefined;
-            resourceInputs["port"] = args ? args.port : undefined;
+            resourceInputs["ports"] = args ? args.ports : undefined;
             resourceInputs["replicas"] = args ? args.replicas : undefined;
             resourceInputs["resources"] = args ? args.resources : undefined;
             resourceInputs["frontendIp"] = undefined /*out*/;
@@ -80,7 +80,7 @@ export interface ServiceDeploymentArgs {
     /**
      * Container ports.
      */
-    port?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    ports?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Number of replicas to deploy.
      */

@@ -18,7 +18,7 @@ class ServiceDeploymentArgs:
                  namespace: pulumi.Input[str],
                  allocation_ip_address: Optional[pulumi.Input[bool]] = None,
                  is_minikube: Optional[pulumi.Input[bool]] = None,
-                 port: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 ports: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  replicas: Optional[pulumi.Input[float]] = None,
                  resources: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
         """
@@ -27,7 +27,7 @@ class ServiceDeploymentArgs:
         :param pulumi.Input[str] namespace: K8s namespace in which to deploy.
         :param pulumi.Input[bool] allocation_ip_address: Allocate an IP address for the service.
         :param pulumi.Input[bool] is_minikube: Using minikube.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] port: Container ports.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] ports: Container ports.
         :param pulumi.Input[float] replicas: Number of replicas to deploy.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] resources: Resource requirements for the container.
         """
@@ -37,8 +37,8 @@ class ServiceDeploymentArgs:
             pulumi.set(__self__, "allocation_ip_address", allocation_ip_address)
         if is_minikube is not None:
             pulumi.set(__self__, "is_minikube", is_minikube)
-        if port is not None:
-            pulumi.set(__self__, "port", port)
+        if ports is not None:
+            pulumi.set(__self__, "ports", ports)
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resources is not None:
@@ -94,15 +94,15 @@ class ServiceDeploymentArgs:
 
     @property
     @pulumi.getter
-    def port(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+    def ports(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
         """
         Container ports.
         """
-        return pulumi.get(self, "port")
+        return pulumi.get(self, "ports")
 
-    @port.setter
-    def port(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
-        pulumi.set(self, "port", value)
+    @ports.setter
+    def ports(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "ports", value)
 
     @property
     @pulumi.getter
@@ -138,7 +138,7 @@ class ServiceDeployment(pulumi.ComponentResource):
                  image: Optional[pulumi.Input[str]] = None,
                  is_minikube: Optional[pulumi.Input[bool]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
-                 port: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 ports: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  replicas: Optional[pulumi.Input[float]] = None,
                  resources: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  __props__=None):
@@ -150,7 +150,7 @@ class ServiceDeployment(pulumi.ComponentResource):
         :param pulumi.Input[str] image: Docker image to deploy.
         :param pulumi.Input[bool] is_minikube: Using minikube.
         :param pulumi.Input[str] namespace: K8s namespace in which to deploy.
-        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] port: Container ports.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] ports: Container ports.
         :param pulumi.Input[float] replicas: Number of replicas to deploy.
         :param pulumi.Input[Mapping[str, pulumi.Input[str]]] resources: Resource requirements for the container.
         """
@@ -181,7 +181,7 @@ class ServiceDeployment(pulumi.ComponentResource):
                  image: Optional[pulumi.Input[str]] = None,
                  is_minikube: Optional[pulumi.Input[bool]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
-                 port: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
+                 ports: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  replicas: Optional[pulumi.Input[float]] = None,
                  resources: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  __props__=None):
@@ -203,7 +203,7 @@ class ServiceDeployment(pulumi.ComponentResource):
             if namespace is None and not opts.urn:
                 raise TypeError("Missing required property 'namespace'")
             __props__.__dict__["namespace"] = namespace
-            __props__.__dict__["port"] = port
+            __props__.__dict__["ports"] = ports
             __props__.__dict__["replicas"] = replicas
             __props__.__dict__["resources"] = resources
             __props__.__dict__["frontend_ip"] = None

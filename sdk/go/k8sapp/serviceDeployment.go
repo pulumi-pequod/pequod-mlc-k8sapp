@@ -51,7 +51,7 @@ type serviceDeploymentArgs struct {
 	// K8s namespace in which to deploy.
 	Namespace string `pulumi:"namespace"`
 	// Container ports.
-	Port map[string]string `pulumi:"port"`
+	Ports map[string]string `pulumi:"ports"`
 	// Number of replicas to deploy.
 	Replicas *float64 `pulumi:"replicas"`
 	// Resource requirements for the container.
@@ -69,7 +69,7 @@ type ServiceDeploymentArgs struct {
 	// K8s namespace in which to deploy.
 	Namespace pulumi.StringInput
 	// Container ports.
-	Port pulumi.StringMapInput
+	Ports pulumi.StringMapInput
 	// Number of replicas to deploy.
 	Replicas pulumi.Float64PtrInput
 	// Resource requirements for the container.

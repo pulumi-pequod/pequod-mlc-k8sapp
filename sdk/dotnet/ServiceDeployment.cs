@@ -72,16 +72,16 @@ namespace Pequod.K8sapp
         [Input("namespace", required: true)]
         public Input<string> Namespace { get; set; } = null!;
 
-        [Input("port")]
-        private InputMap<string>? _port;
+        [Input("ports")]
+        private InputMap<string>? _ports;
 
         /// <summary>
         /// Container ports.
         /// </summary>
-        public InputMap<string> Port
+        public InputMap<string> Ports
         {
-            get => _port ?? (_port = new InputMap<string>());
-            set => _port = value;
+            get => _ports ?? (_ports = new InputMap<string>());
+            set => _ports = value;
         }
 
         /// <summary>
