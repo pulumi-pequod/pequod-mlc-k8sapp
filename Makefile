@@ -1,4 +1,4 @@
-VERSION         := 0.0.5
+VERSION         := 0.0.7
 
 PACK            := k8sapp
 ORG							:= pulumi-pequod

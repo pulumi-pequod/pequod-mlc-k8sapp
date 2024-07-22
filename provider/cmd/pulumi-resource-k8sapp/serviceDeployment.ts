@@ -61,8 +61,9 @@ export class ServiceDeployment extends pulumi.ComponentResource {
                 this.ipAddress = this.service.spec.clusterIP 
             } else {
                 const ingress = this.service.status.apply(status => status.loadBalancer.ingress[0])
+                ingress.apply(ingress => console.log("Ingress: ", ingress))
                 this.ipAddress = ingress.apply(ingress => ingress.ip || ingress.hostname || "")
-                console.log("Allocated IP address for service: ", this.ipAddress)
+                this.ipAddress.apply(ip => console.log("Allocated IP address for service: ", ip))
             }
         }
     }
