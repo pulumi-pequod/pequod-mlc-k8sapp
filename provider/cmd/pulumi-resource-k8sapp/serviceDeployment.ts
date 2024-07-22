@@ -54,16 +54,13 @@ export class ServiceDeployment extends pulumi.ComponentResource {
             },
         }, { parent: this });
 
-        console.log("args", args)
+        this.ipAddress = pulumi.output("undefined")
         if (args.allocateIpAddress) {
-            console.log("Allocating IP address for service")
             if (args.isMinikube) {
                 this.ipAddress = this.service.spec.clusterIP 
             } else {
                 const ingress = this.service.status.apply(status => status.loadBalancer.ingress[0])
-                ingress.apply(ingress => console.log("Ingress: ", ingress))
                 this.ipAddress = ingress.apply(ingress => ingress.ip || ingress.hostname || "")
-                this.ipAddress.apply(ip => console.log("Allocated IP address for service: ", ip))
             }
         }
     }
